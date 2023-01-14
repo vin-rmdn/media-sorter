@@ -1,27 +1,31 @@
 #!/usr/bin/env python3
 
 # ====== DISCLAIMER:
-## AS THIS IS A HEAVY OPERATION, WE ARE USING THE MULTITHREAD LIBRARY.
+# AS THIS IS A HEAVY OPERATION, WE ARE USING THE MULTITHREAD LIBRARY.
 
-# ====== EXTERNAL LIBRARIES
-## Image-related libraries
-import imagehash		# average hash
-from PIL import Image	# loading images
-import cv2				# showing images
-## OS-related libraries
+# ====== LIBRARIES
+# ==== Internal libraries
+# ==== OS-related libraries
 import sys				# argv
 import os				# check dir
 import time				# sleep function
 import platform			# File path distinction
 import subprocess
-## GPU-related variables
+
+
+# ====== EXTERNAL LIBRARIES
+# ==== Image-related libraries
+import imagehash		# average hash
+from PIL import Image	# loading images
+import cv2				# showing images
+# ==== GPU-related variables
 import numpy as np
-## Low-level processing
-### Multiprocessing - utilise real threads.
+# ==== Low-level processing
+# == Multiprocessing - utilise real threads.
 from multiprocessing import Process, Value, Array, Pool, Manager, freeze_support
-### GPU
+# == GPU
 from numba import vectorize, cuda
-## Debugging purposes
+# ==== Debugging purposes
 from pprint import pprint
 from itertools import repeat
 

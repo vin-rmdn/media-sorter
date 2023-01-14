@@ -4,7 +4,7 @@ import os
 import sys
 import datetime
 
-SEPARATOR = '\\'
+SEPARATOR = '/'
 SUPPORTED_FILES = ['.jpg', '.jpeg', '.png']
 
 def __main__():
@@ -13,8 +13,8 @@ def __main__():
         IS_WITH_BYTESIZE = True
 
     location = sys.argv[1]
-    if location[-1] != '\\':
-        location += '\\'
+    if location[-1] != SEPARATOR:
+        location += SEPARATOR
     files = os.listdir(sys.argv[1])
     if not files:
         print("Invalid input. Exiting.")

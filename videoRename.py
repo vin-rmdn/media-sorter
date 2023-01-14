@@ -2,7 +2,6 @@
 
 import datetime
 from datetime import tzinfo, timezone
-from imageSimilarity import SUPPORTED_EXTS
 import os
 import sys
 from hachoir import metadata, parser
@@ -16,6 +15,7 @@ SUPPORTED_EXTS = ['.mov', '.mp4', '.avi']
 # Directory
 directory = tools.path.Path(sys.argv[1])
 
+
 def main():
     files = os.listdir(directory)
     for file in files:
@@ -28,7 +28,7 @@ def main():
 
         attributes = {}
 
-        with parser.createParser(directory+file) as parser_handle:
+        with parser.createParser(directory + file) as parser_handle:
             metadata_handle = metadata.extractMetadata(parser_handle)
             for i in metadata_handle:
                 if i:
@@ -39,22 +39,25 @@ def main():
             print(file + 'has default date. Skipping.')
             continue
 
-        file_new = str(attributes['creation_date'])+extension
+        file_new = str(attributes['creation_date']) + extension
         # Splicing and appending
         file_new = file_new[:10] + ' -' + file_new[10:]
         file_new = file_new.replace(':', '.')  # Maximum Windows compatibility
 
-        if not os.path.isfile(directory+file_new):
+        if not os.path.isfile(directory + file_new):
             print(file, '->', file_new)
-            os.rename(directory+file, directory+file_new)
+            os.rename(directory + file, directory + file_new)
         else:
             iteration = 1
-            file_new_with_extension = os.path.splitext(file_new)[0] + ' - '+str(iteration) + os.path.splitext(file_new)[1]
-            while os.path.isfile(directory+file_new_with_extension):
+            file_new_with_extension = os.path.splitext(
+                file_new)[0] + ' - ' + str(iteration) + os.path.splitext(file_new)[1]
+            while os.path.isfile(directory + file_new_with_extension):
                 iteration += 1
-                file_new_with_extension = os.path.splitext(file_new)[0] + ' - '+str(iteration) + os.path.splitext(file_new)[1]
+                file_new_with_extension = os.path.splitext(
+                    file_new)[0] + ' - ' + str(iteration) + os.path.splitext(file_new)[1]
             print(file, '->', file_new_with_extension)
-            os.rename(directory+file, directory+file_new_with_extension)
+            os.rename(directory + file, directory + file_new_with_extension)
+
 
 if __name__ == '__main__':
     main()
