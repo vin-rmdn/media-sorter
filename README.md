@@ -1,4 +1,4 @@
-# Media Sorter — a project by Sayastershire.
+# Media Sorter — a project by vin-rmdn.
 
 ## About
 
